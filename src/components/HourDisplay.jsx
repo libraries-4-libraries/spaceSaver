@@ -1,7 +1,8 @@
 import React from "react";
 import Cell from "./Cell.jsx";
 import moment from "moment";
-import Grid from "@material-ui/core/Grid"
+import Grid from "@material-ui/core/Grid";
+import { HourCell } from './styledComponents.jsx';
 
 function HourDisplay(props) {
   let hours = [];
@@ -15,11 +16,11 @@ function HourDisplay(props) {
   }
 
   return (
-       <Grid container={true} direction={'column'} alignContent={'flex-start'}>
+      <HourCell>
         {hours.map(item => {
           return <Cell color={item[0]} text={item[1]} align={'center'} booked={null} />;
         })}
-      </Grid>
+      </HourCell>
   );
 }
 

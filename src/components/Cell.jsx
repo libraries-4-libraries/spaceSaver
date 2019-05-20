@@ -44,7 +44,18 @@ class Cell extends React.Component{
   }
 
   render(){
-    return <Grid item={true} onClick={this.onClick} padding='none' align={this.props.align} style={{ background: this.state.booked ? '#92D177' : this.props.color}}>{this.state.text}</Grid>;
+    return (
+      <div
+        item={true}
+        onClick={this.onClick}
+        padding='none'
+        align={this.props.align}
+        style={{
+          background: this.state.booked ? '#92D177' : this.props.color
+        }}>
+        {this.state.text}
+      </div>
+    );
   }
 }
 

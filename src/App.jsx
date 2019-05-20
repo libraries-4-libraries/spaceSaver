@@ -44,15 +44,21 @@ class App extends React.Component{
           roomBookings.push(booking);
         }
       })
-      return <Grid item={true}> <RoomDisplay startTime={moment(room.openHours.start)} duration={8*4} currentBookings={roomBookings} roomName={room.name}/> </Grid>
+      return (
+        <RoomDisplay
+          startTime={moment(room.openHours.start)}
+          duration={8*4}
+          currentBookings={roomBookings}
+          roomName={room.name}/>
+        )
     })
   }
   render(){
     return (
-        <Grid container={true}>
-          <Grid item={true}><HourDisplay startTime={moment({hours: 10})} duration={8*4}/></Grid>
+        <div container={true}>
+          <HourDisplay startTime={moment({hours: 10})} duration={8*4}/>
           {this.generateRooms()}
-        </Grid>
+        </div>
     )
   }
 }
