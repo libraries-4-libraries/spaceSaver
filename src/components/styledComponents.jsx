@@ -19,9 +19,17 @@ const RoomCell = styled.div`
   height: 10vh;
   width: 15wh;
   justify-content: center;
+`
 
+const BasicCell = styled.div`
+  position: relative;
+  display: block;
+  height: 4vh;
+  width: 6wh;
+  text-align: ${props => props.alignCell};
+  background: ${props => props.backgroundColor};
 `
 
 
 
-export { GlobalStyle, HourCell, RoomCell }
+export { GlobalStyle, HourCell, RoomCell, BasicCell }

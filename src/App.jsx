@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import moment from 'moment';
 
-import Grid from '@material-ui/core/Grid'
+//import Grid from '@material-ui/core/Grid'
 import HourDisplay from './components/HourDisplay.jsx'
 import RoomDisplay from './components/RoomDisplay.jsx'
 

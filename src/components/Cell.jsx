@@ -1,5 +1,6 @@
 import React from "react";
-import Grid from '@material-ui/core/Grid'
+import { BasicCell } from './styledComponents.jsx';
+//import Grid from '@material-ui/core/Grid'
 
 
 class Cell extends React.Component{
@@ -45,16 +46,12 @@ class Cell extends React.Component{
 
   render(){
     return (
-      <div
-        item={true}
+      <BasicCell
+        alignCell={this.props.align}
         onClick={this.onClick}
-        padding='none'
-        align={this.props.align}
-        style={{
-          background: this.state.booked ? '#92D177' : this.props.color
-        }}>
+        backgroundColor={this.state.booked ? '#92D177' : this.props.color}>
         {this.state.text}
-      </div>
+      </BasicCell>
     );
   }
 }
