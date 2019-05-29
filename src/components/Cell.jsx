@@ -1,9 +1,10 @@
 import React from "react";
-import TableCell from '@material-ui/core/TableCell'
+import { BasicCell } from './styledComponents.jsx';
+//import Grid from '@material-ui/core/Grid'
 
 
-class Cell extends React.Component{
-  constructor(props){
+class Cell extends React.Component {
+  constructor(props) {
     super(props);
     this.state = {
       booked: false
@@ -11,26 +12,26 @@ class Cell extends React.Component{
     this.onClick = this.onClick.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.setState({
       booked: this.props.booked,
       text: this.props.text
     })
   }
 
-  onClick(){
-    if (this.state.booked === false){
+  onClick() {
+    if (this.state.booked === false) {
       let name = window.prompt('Please enter name for reservation: ')
-      if (name){
+      if (name) {
         //post request to server
         this.setState({
           booked: true,
           text: name
         })
       }
-    } else if (this.state.booked===true){
+    } else if (this.state.booked === true) {
       let cancel = window.confirm('Cancel reservation?')
-      if (cancel){
+      if (cancel) {
         //delete request to server
 
         this.setState({
@@ -43,8 +44,15 @@ class Cell extends React.Component{
     }
   }
 
-  render(){
-    return <TableCell onClick={this.onClick} padding='none' align={this.props.align} style={{ background: this.state.booked ? '#92D177' : this.props.color}}>{this.state.text}</TableCell>;
+  render() {
+    return (
+      <BasicCell
+        alignCell={this.props.align}
+        onClick={this.onClick}
+        backgroundColor={this.state.booked ? '#92D177' : this.props.color}>
+        {this.state.text}
+      </BasicCell>
+    );
   }
 }
 
