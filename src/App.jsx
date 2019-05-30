@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 
 import moment from 'moment';
 
-//import Grid from '@material-ui/core/Grid'
 import HourDisplay from './components/HourDisplay.jsx'
 import RoomDisplay from './components/RoomDisplay.jsx'
+import SelectBar from './components/SelectBar.jsx'
 
 const bookingsURL = 'http://localhost:3838/bookings'
 const roomsURL = 'http://localhost:3838/rooms'
@@ -55,7 +55,8 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div container={true}>
+      <div>
+        <SelectBar/>
         <HourDisplay startTime={moment({ hours: 10 })} duration={8 * 4} />
         {this.generateRooms()}
       </div>

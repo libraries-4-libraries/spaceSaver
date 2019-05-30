@@ -1,6 +1,5 @@
 import React from "react";
 import { BasicCell } from './styledComponents.jsx';
-//import Grid from '@material-ui/core/Grid'
 
 
 class Cell extends React.Component {

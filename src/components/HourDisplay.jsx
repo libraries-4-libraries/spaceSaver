@@ -1,7 +1,6 @@
 import React from "react";
 import Cell from "./Cell.jsx";
 import moment from "moment";
-//import Grid from "@material-ui/core/Grid";
 import { HourCell } from './styledComponents.jsx';
 
 function HourDisplay(props) {
