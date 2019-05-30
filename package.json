@@ -26,6 +26,8 @@
     "nodemon": "^1.18.10",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "styled-components": "^4.2.0",
+    "styled-reset": "^2.0.13",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0"
   }

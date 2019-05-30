@@ -1,7 +1,8 @@
 import React from "react";
 import Cell from "./Cell.jsx";
 import moment from "moment";
-import TableRow from "@material-ui/core/TableRow"
+//import Grid from "@material-ui/core/Grid"
+import { RoomCell } from './styledComponents.jsx';
 
 
 function RoomDisplay(props) {
@@ -14,7 +15,7 @@ function RoomDisplay(props) {
     let text = 'available';
     let booked = false;
     let align = 'center'
-    props.currentBookings.forEach((booking)=>{
+    props.currentBookings.forEach((booking) => {
       let time = moment(booking.startTime);
       //console.log('hours compare', time.hours, hour.hours)
       if (time.hours() === hour.hours()) {
@@ -24,15 +25,15 @@ function RoomDisplay(props) {
     })
     hours.push([bgColor, text, booked, hour.toISOString(), align]);
 
-    props.startTime.add(1, "hour");
+    props.startTime.add(15, "minutes");
   }
 
   return (
-    <TableRow>
-        {hours.map(item => {
-          return <Cell color={item[0]} text={item[1]} booked={item[2]} time={item[3]} room={props.roomName} align={item[4]} />;
-        })}
-    </TableRow>
+    <RoomCell>
+      {hours.map(item => {
+        return <Cell color={item[0]} text={item[1]} booked={item[2]} time={item[3]} room={props.roomName} align={item[4]} />;
+      })}
+    </RoomCell>
   );
 }
 
