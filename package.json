@@ -15,7 +15,8 @@
     "express": "^4.16.4",
     "firebase": "^5.9.0",
     "firebase-admin": "^7.1.1",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "react-selectable": "^2.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",

@@ -1,9 +1,11 @@
 import React from "react";
 import Cell from "./Cell.jsx";
 import moment from "moment";
-//import Grid from "@material-ui/core/Grid"
+
+import { createSelectable, SelectableGroup } from "react-selectable";
 import { RoomCell } from './styledComponents.jsx';
 
+const SelectableCell = createSelectable(Cell);
 
 function RoomDisplay(props) {
   let hours = [];
@@ -30,9 +32,15 @@ function RoomDisplay(props) {
 
   return (
     <RoomCell>
-      {hours.map(item => {
-        return <Cell color={item[0]} text={item[1]} booked={item[2]} time={item[3]} room={props.roomName} align={item[4]} />;
-      })}
+       <SelectableGroup
+          onSelection={keys => {
+            console.log("these have been selected:", keys);
+          }}
+      >
+        {hours.map((item, index) => {
+          return <SelectableCell selectableKey={item} key={index} color={item[0]} text={item[1]} booked={item[2]} time={item[3]} room={props.roomName} align={item[4]} />;
+        })}
+      </SelectableGroup>
     </RoomCell>
   );
 }
