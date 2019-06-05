@@ -12,7 +12,7 @@ const SelectWrap = styled.div`
   display: block;
   height: 15vh;
   width: 90vh;
-  justify-content: start;
+  justify-content: center;
 `
 
 const HourCell = styled.div`
@@ -20,7 +20,7 @@ const HourCell = styled.div`
   display: inline-block;
   height: 10vh;
   width: 15vh;
-  justify-content: start;
+  justify-content: center;
 `
 
 const RoomCell = styled.div`
@@ -38,8 +38,41 @@ const BasicCell = styled.div`
   width: 15vh;
   text-align: ${props => props.alignCell};
   background: ${props => props.backgroundColor};
+  padding-top: 4vh;
+`
+const LocationSelectorWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+  background-color: white;
+  margin: 4vh;
+  justify-content: start;
+`
+
+const LocationSelector = styled.select`
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border: white;
+  border-radius: 0px;
+  background-color: white;
+  justify-content: start;
+  font-family: Arial;
+`
+
+const Input = styled.input`
+  position: relative;
+  display: inline-block;
 `
 
 
 
-export { GlobalStyle, SelectWrap, HourCell, RoomCell, BasicCell }
+export {
+  GlobalStyle,
+  SelectWrap,
+  HourCell,
+  RoomCell,
+  BasicCell,
+  LocationSelector,
+  LocationSelectorWrapper,
+  Input
+}
