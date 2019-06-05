@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import {
   SelectWrap,
-  LocationSelector,
+  DateSelectorWrapper,
   LocationSelectorWrapper,
   Input
 } from './styledComponents.jsx';
@@ -41,7 +41,7 @@ class SelectBar extends React.Component {
     return (
       <SelectWrap>
         <LocationDropdown/>
-        <Input type="date"/>
+        <DateSelectorWrapper>{this.state.date}</DateSelectorWrapper>
       </SelectWrap>
     );
   }
@@ -55,3 +55,5 @@ export default SelectBar;
 //     {this.displayLocations()}
 //   </LocationSelector>
 // </LocationSelectorWrapper>
+
+//<Input type="date" />

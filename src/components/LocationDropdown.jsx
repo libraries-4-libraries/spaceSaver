@@ -1,6 +1,7 @@
 import React from "react";
 import onClickOutside from "react-onclickoutside";
 import { formatLocations } from './helpers.js';
+import { LocationSelectorWrapper } from './styledComponents.jsx';
 
 const locationsMock = [
   'Walnut Creek Library',
@@ -57,11 +58,11 @@ class LocationDropdown extends React.Component {
   render() {
     const { listOpen, locations, headerTitle } = this.state;
     return (
-      <div onClick={this.onClick}>
+      <LocationSelectorWrapper onClick={this.onClick}>
         {headerTitle}
-        {listOpen ? ">" : "<"}
+        {listOpen ? " <" : " >"}
         {this.renderList(listOpen, locations)}
-      </div>
+      </LocationSelectorWrapper>
     );
   }
 }

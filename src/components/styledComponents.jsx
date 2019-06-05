@@ -41,23 +41,40 @@ const BasicCell = styled.div`
   padding-top: 4vh;
 `
 const LocationSelectorWrapper = styled.div`
-  position: relative;
+  position: absolute;
   display: inline-block;
-  background-color: white;
+  z-index: 1;
+  border: solid;
   margin: 4vh;
-  justify-content: start;
-`
-
-const LocationSelector = styled.select`
-  position: relative;
-  display: inline-block;
-  outline: none;
-  border: white;
-  border-radius: 0px;
+  padding: 10px;
   background-color: white;
   justify-content: start;
   font-family: Arial;
 `
+
+const DateSelectorWrapper = styled.div`
+  position: absolute;
+  display: inline-block;
+  left: 50vh;
+  z-index: 1;
+  border: solid;
+  margin: 4vh;
+  padding: 10px;
+  background-color: white;
+  justify-content: start;
+  font-family: Arial;
+`
+
+// const LocationSelectorWrapper = styled.div`
+//   position: relative;
+//   display: inline-block;
+//   outline: none;
+//   border: white;
+//   border-radius: 0px;
+//   background-color: white;
+//   justify-content: start;
+//   font-family: Arial;
+// `
 
 const Input = styled.input`
   position: relative;
@@ -72,7 +89,7 @@ export {
   HourCell,
   RoomCell,
   BasicCell,
-  LocationSelector,
   LocationSelectorWrapper,
+  DateSelectorWrapper,
   Input
 }

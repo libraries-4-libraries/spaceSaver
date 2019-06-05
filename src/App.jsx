@@ -66,3 +66,6 @@ class App extends React.Component {
 
 const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement)
+
+  // < HourDisplay startTime = { moment({ hours: 10 }) } duration = { 8 * 4 } />
+  //   { this.generateRooms() }
