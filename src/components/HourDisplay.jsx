@@ -16,8 +16,8 @@ function HourDisplay(props) {
 
   return (
     <HourCell>
-      {hours.map(item => {
-        return <Cell color={item[0]} text={item[1]} align={'center'} booked={null} />;
+      {hours.map((item, index) => {
+        return <Cell key={index} color={item[0]} text={item[1]} align={'center'} booked={null} />;
       })}
     </HourCell>
   );

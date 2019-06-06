@@ -37,7 +37,7 @@ class App extends React.Component {
   }
 
   generateRooms() {
-    return this.state.rooms.map((room) => {
+    return this.state.rooms.map((room, index) => {
       let roomBookings = [];
       this.state.bookings.forEach((booking) => {
         if (booking.room === room.name) {
@@ -46,6 +46,7 @@ class App extends React.Component {
       })
       return (
         <RoomDisplay
+          key={index}
           startTime={moment(room.openHours.start)}
           duration={8 * 4}
           currentBookings={roomBookings}

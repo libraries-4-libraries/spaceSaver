@@ -1,7 +1,7 @@
 import React from "react";
 import onClickOutside from "react-onclickoutside";
 import { formatLocations } from './helpers.js';
-import { LocationSelectorWrapper } from './styledComponents.jsx';
+import { LocationSelectorWrapper, LocationItem } from './styledComponents.jsx';
 
 const locationsMock = [
   'Walnut Creek Library',
@@ -22,10 +22,10 @@ class LocationDropdown extends React.Component {
       locations: formatLocations(locationsMock)
     }
     this.onClick = this.onClick.bind(this);
+    this.selectLocation = this.selectLocation.bind(this);
   }
 
   handleClickOutside() {
-    console.log('handleOutside clicked')
     this.setState({ listOpen: false });
   }
 
@@ -35,23 +35,25 @@ class LocationDropdown extends React.Component {
     }))
   }
 
+  selectLocation(e) {
+    this.setState({ headerTitle: e.currentTarget.textContent });
+  }
+
   renderList(listOpen, locations) {
     if (listOpen) {
-      return (
-        <div>
-          <ul>
-            {locations.map((item, index) => <li key={index}>{item.title}</li>)}
-          </ul>
-        </div>
-      );
+      return locations.map((item, index) => {
+        return (
+          <LocationItem key={index} onClick={this.selectLocation}>
+            {item.title}
+          </LocationItem>
+        );
+      });
     } else {
       return null;
     }
   }
 
   onClick() {
-    console.log('Location Menu Clicked!')
-    //console.log(JSON.stringify(this.state.locations))
     this.toggleList();
   }
 
@@ -67,5 +69,4 @@ class LocationDropdown extends React.Component {
   }
 }
 
-//export default LocationDropdown;
 export default onClickOutside(LocationDropdown);

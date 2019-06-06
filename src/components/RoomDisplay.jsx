@@ -29,8 +29,8 @@ function RoomDisplay(props) {
 
   return (
     <RoomCell>
-      {hours.map(item => {
-        return <Cell color={item[0]} text={item[1]} booked={item[2]} time={item[3]} room={props.roomName} align={item[4]} />;
+      {hours.map((item, index) => {
+        return <Cell key={index} color={item[0]} text={item[1]} booked={item[2]} time={item[3]} room={props.roomName} align={item[4]} />;
       })}
     </RoomCell>
   );

@@ -49,7 +49,23 @@ const LocationSelectorWrapper = styled.div`
   padding: 10px;
   background-color: white;
   justify-content: start;
+  cursor: pointer;
   font-family: Arial;
+`
+
+const LocationItem = styled.div`
+  position: relative;
+  display: block;
+  outline: none;
+  border: white;
+  border-radius: 0px;
+  background-color: white;
+  justify-content: start;
+  cursor: pointer;
+  font-family: Arial;
+  :hover {
+    background-color: grey;
+  }
 `
 
 const DateSelectorWrapper = styled.div`
@@ -65,23 +81,10 @@ const DateSelectorWrapper = styled.div`
   font-family: Arial;
 `
 
-// const LocationSelectorWrapper = styled.div`
-//   position: relative;
-//   display: inline-block;
-//   outline: none;
-//   border: white;
-//   border-radius: 0px;
-//   background-color: white;
-//   justify-content: start;
-//   font-family: Arial;
-// `
-
 const Input = styled.input`
   position: relative;
   display: inline-block;
 `
-
-
 
 export {
   GlobalStyle,
@@ -90,6 +93,7 @@ export {
   RoomCell,
   BasicCell,
   LocationSelectorWrapper,
+  LocationItem,
   DateSelectorWrapper,
   Input
 }
