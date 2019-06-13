@@ -94,6 +94,23 @@ const MonthBar = styled.div`
   font-family: Arial;
 `
 
+const DateCell = styled.div`
+  position: relative;
+  display: inline-block;
+  height: 5vh;
+  width: 3vh;
+  z-index: 1;
+  margin: 3vh;
+  outline: none;
+  border: white;
+  border-radius: 0px;
+  background-color: white;
+  color: ${ props => props.textColor };
+  justify-content: start;
+  cursor: pointer;
+  font-family: Arial;
+`
+
 const WeekdayBar = styled.div`
   position: absolute;
   display: block;
@@ -137,6 +154,7 @@ export {
   LocationItem,
   DateSelectorWrapper,
   MonthBar,
+  DateCell,
   WeekdayBar,
   WeekdayCell,
   Input

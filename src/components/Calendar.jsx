@@ -4,7 +4,13 @@ import onClickOutside from "react-onclickoutside";
 
 import calendar, { WEEK_DAYS, THIS_MONTH, getMonthFirstDay } from './helpers/calendar.js';
 
-import { DateSelectorWrapper, MonthBar, WeekdayBar, WeekdayCell } from './styledComponents.jsx';
+import {
+  DateSelectorWrapper,
+  MonthBar,
+  DateCell,
+  WeekdayBar,
+  WeekdayCell
+} from './styledComponents.jsx';
 
 class Calendar extends React.Component{
   constructor(props) {
@@ -25,7 +31,7 @@ class Calendar extends React.Component{
   toggleList() {
     this.setState(prevState => ({
       listOpen: !prevState.listOpen
-    }))
+    }));
   }
 
   onClick() {
@@ -35,33 +41,37 @@ class Calendar extends React.Component{
   renderDates() {
     let vert = [...Array(7).keys()];
     let horiz = 7;
-    let counter = 0
-
-    console.log('Current month first day: ' + getMonthFirstDay())
+    let counter = 0;
 
     return vert.map((row, index) => {
       if (row > 0) { counter = counter + horiz }
       let x = counter;
       let n = counter + horiz;
-      let rowCells = calendar().slice(x, n)
+      let rowCells = calendar().slice(x, n);
+
       return (
         <div key={index}>
           {rowCells.map((date, index) => {
+            let color = 'black'
+            if (THIS_MONTH != Number(date[1][1])) { color = 'grey'; }
+
+            if (date[2][0] === '0') { date[2] = date[2].replace(/0/gi, '') }
+
             return (
-              <WeekdayCell key={index}>
+              <DateCell key={index} textColor={color}>
                 {date[2]}
-              </WeekdayCell>
-            )
+              </DateCell>
+            );
           })}
         </div>
       );
-    })
+    });
   }
 
   renderList(listOpen) {
     if (listOpen) {
-      console.log('Current month: ' + moment().format('MMMM'));
-      console.log(calendar());
+      //console.log('Current month: ' + moment().format('MMMM'));
+      //console.log(calendar());
       return (
         <MonthBar>
         {moment().format('MMMM')}
@@ -77,23 +87,11 @@ class Calendar extends React.Component{
         </WeekdayBar>
         </MonthBar>
       );
-
     }
-    // if (listOpen) {
-    //   return locations.map((item, index) => {
-    //     return (
-    //       <LocationItem key={index} onClick={this.selectLocation}>
-    //         {item.title}
-    //       </LocationItem>
-    //     );
-    //   });
-    // } else {
-    //   return null;
-    // }
   }
 
   componentDidMount() {
-    console.log('Calendar mounted')
+    console.log('Calendar mounted');
   }
 
   render() {
