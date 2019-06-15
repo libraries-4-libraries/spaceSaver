@@ -29,29 +29,21 @@ class DateSelector extends React.Component {
     this.toggleList();
   }
 
-  renderList(listOpen) {
-    if (listOpen) {
-      return (
-        <CurrentMonth />
-      );
-    }
-  }
-
   componentDidMount() {
     console.log('Date Selector mounted');
   }
 
   render() {
-    const {date, listOpen} = this.state;
+    const { listOpen } = this.state;
 
     return (
-      <DateSelectorWrapper onClick={this.onClick}>
-        {date}
-        {listOpen ? " <" : " >"}
-        {this.renderList(listOpen)}
-      </DateSelectorWrapper>
+      <div onClick={this.onClick}>
+        <CurrentMonth open={listOpen} />
+      </div>
     );
   }
 }
 
 export default onClickOutside(DateSelector);
+
+//{listOpen ? " <" : " >"}
