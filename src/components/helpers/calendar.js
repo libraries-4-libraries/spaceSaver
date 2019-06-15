@@ -32,6 +32,23 @@ export const CALENDAR_MONTHS = {
   December: "Dec"
 }
 
+//Calendar months names as array
+export const CALENDAR_MONTHS_ARRAY = [
+  null,
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
+
 // Weeks displayed on calendar
 export const CALENDAR_WEEKS = 6;
 

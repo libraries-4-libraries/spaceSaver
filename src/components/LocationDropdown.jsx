@@ -1,6 +1,6 @@
 import React from "react";
 import onClickOutside from "react-onclickoutside";
-import { formatLocations } from './helpers.js';
+import { formatLocations } from './helpers/locations.js';
 import { LocationSelectorWrapper, LocationItem } from './styledComponents.jsx';
 
 const locationsMock = [
