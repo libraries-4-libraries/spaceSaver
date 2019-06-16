@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from "moment";
 import onClickOutside from "react-onclickoutside";
-import calendar, { THIS_MONTH, WEEK_DAYS, CALENDAR_MONTHS } from '../helpers/calendar.js';
+import calendar, { THIS_YEAR, THIS_MONTH, WEEK_DAYS, CALENDAR_MONTHS } from '../helpers/calendar.js';
 import { DateSelectorWrapper, CurrentMonthLayout, WeekdayCell, DateCell, Calendar, MonthBar } from './styles.js';
 
 class CurrentDate extends React.Component {
@@ -37,10 +37,10 @@ class CurrentDate extends React.Component {
   }
 
   selectDate(e) {
-
     let {date, monthName } = this.state;
+    let year = THIS_YEAR;
     let selection = e.currentTarget.textContent;
-    let notElevenCheck = !(selection[0] === '1')
+    let notElevenCheck = !(selection[0] === '1');
 
     if (selection === '1' || (notElevenCheck && selection[1] === '1')) {
       selection = selection + 'st';
@@ -52,7 +52,9 @@ class CurrentDate extends React.Component {
       selection = selection + 'th';
     }
 
-    date = moment().format(`[${monthName}] [${selection}] YYYY`);
+    if (THIS_MONTH === 12) { year = year + 1 }
+
+    date = `${monthName} ${selection} ${year}`;
     this.setState({ date, listOpen: false });
   }
 
