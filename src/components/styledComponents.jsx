@@ -5,9 +5,19 @@ const GlobalStyle = createGlobalStyle`
   ${reset};
 `;
 
-const SelectWrap = styled.div`
+const AppWrap = styled.div`
   position: relative;
   border: solid;
+  display: block;
+  width: 90vh;
+  top: 5vh;
+  left: 5vh;
+  margin-bottom: 5vh;
+`
+
+const SelectWrap = styled.div`
+  position: relative;
+  border-bottom: solid;
   background: green;
   display: block;
   height: 15vh;
@@ -18,27 +28,21 @@ const SelectWrap = styled.div`
 const HourCell = styled.div`
   position: relative;
   display: inline-block;
-  height: 10vh;
-  width: 15vh;
-  justify-content: center;
 `
 
 const RoomCell = styled.div`
   position: relative;
   display: inline-block;
-  height: 10vh;
-  width: 15vh;
-  justify-content: center;
 `
 
 const BasicCell = styled.div`
   position: relative;
   display: block;
-  height: 10vh;
+  height: 6vh;
   width: 15vh;
   text-align: ${props => props.alignCell};
   background: ${props => props.backgroundColor};
-  padding-top: 4vh;
+  padding-top: 3vh;
 `
 const LocationSelectorWrapper = styled.div`
   position: absolute;
@@ -70,6 +74,7 @@ const LocationItem = styled.div`
 
 export {
   GlobalStyle,
+  AppWrap,
   SelectWrap,
   HourCell,
   RoomCell,

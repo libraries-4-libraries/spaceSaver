@@ -39,5 +39,3 @@ class DateSelector extends React.Component {
 }
 
 export default onClickOutside(DateSelector);
-
-//{listOpen ? " <" : " >"}

@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from "moment";
 import calendar, { THIS_MONTH, WEEK_DAYS, CALENDAR_MONTHS } from '../helpers/calendar.js';
-import { DateSelectorWrapper, WeekdayBar, WeekdayCell, DateCell } from './styles.js';
+import { DateSelectorWrapper, CurrentMonthLayout, WeekdayCell, DateCell, Calendar, MonthBar } from './styles.js';
 
 class CurrentDate extends React.Component {
   constructor(props) {
@@ -41,8 +41,7 @@ class CurrentDate extends React.Component {
   }
 
 
-  renderDates() {
-    const { monthNumber } = this.state;
+  renderDates(month) {
 
     let rows = [...Array(7).keys()];
     let weekDays = 7;
@@ -53,7 +52,7 @@ class CurrentDate extends React.Component {
       let rowStart = counter;
       let rowEnd = counter + weekDays;
 
-      let rowCells = calendar(monthNumber).slice(rowStart, rowEnd);
+      let rowCells = calendar(month).slice(rowStart, rowEnd);
 
       return (
         <div key={index}>
@@ -61,7 +60,7 @@ class CurrentDate extends React.Component {
             let color = 'black';
             let selectorFunction = this.selectDate
 
-            let prevNextTest = !(monthNumber === Number(dateInfo[1][1]));
+            let prevNextTest = !(month === Number(dateInfo[1][1]));
             let currentDayTest = (!prevNextTest && dateInfo[2] === moment().format('Do').slice(0, 2));
             let replaceZeroTest = (dateInfo[2][0] === '0')
 
@@ -82,26 +81,27 @@ class CurrentDate extends React.Component {
 
 
   render() {
+    const { monthNumber } = this.state;
 
     if (!this.props.open) {
       return (
         <DateSelectorWrapper>
-          {this.state.date}
+          {`${this.state.date} >`}
         </DateSelectorWrapper>
       );
     } else {
       return (
-        <div>
-        {this.state.monthName}
-        <WeekdayBar>
+        <Calendar>
+        <CurrentMonthLayout>
+            <MonthBar>{`${this.state.monthName} >`}</MonthBar>
           {Object.values(WEEK_DAYS).map((day, index) => {
             return (
               <WeekdayCell key={index}>{day}</WeekdayCell>
             );
           })}
-          {this.renderDates()}
-        </WeekdayBar>
-        </div>
+          {this.renderDates(monthNumber)}
+        </CurrentMonthLayout>
+        </Calendar>
       );
     }
 

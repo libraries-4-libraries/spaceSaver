@@ -15,38 +15,28 @@ const DateSelectorWrapper = styled.div`
   font-family: Arial;
 `
 
-const MonthBarWrapper = styled.div`
-  position: absolute;
-  display: block;
-  width: 75vh;
-  border: solid;
-  z-index: 1;
-  background-color: white;
-  justify-content: center;
-  cursor: pointer;
-  font-family: Arial;
-`
-
 const DateCell = styled.div`
   position: relative;
   display: inline-block;
   height: 5vh;
   width: 5vh;
   z-index: 1;
-  margin: 1vh;
+  margin: 5px;
+  padding-top: 10px;
   outline: none;
   border: white;
   border-radius: 0px;
   background-color: white;
   color: ${ props => props.textColor};
   cursor: pointer;
+  text-align: center;
   font-family: Arial;
   :hover {
     background-color: grey;
   }
 `
 
-const WeekdayBar = styled.div`
+const CurrentMonthLayout = styled.div`
   position: relative;
   display: block;
   width: 50vh;
@@ -54,6 +44,7 @@ const WeekdayBar = styled.div`
   z-index: 1;
   background-color: white;
   cursor: pointer;
+  text-align: center;
   font-family: Arial;
 `
 
@@ -63,19 +54,45 @@ const WeekdayCell = styled.div`
   height: 5vh;
   width: 5vh;
   z-index: 1;
-  margin: 1vh;
+  margin: 5px;
   outline: none;
   border: white;
   border-radius: 0px;
   background-color: white;
+  cursor: pointer;
+  text-align: center;
+  font-family: Arial;
+`
+
+const Calendar = styled.div`
+  position: relative;
+  display: block;
+  top: 3vh;
+  left: 39.5vh;
+  width: 50vh;
+  z-index: 1;
+  background-color: white;
+  cursor: pointer;
+  font-family: Arial;
+`
+
+const MonthBar = styled.div`
+  position: relative;
+  display: block;
+  width: 45vh;
+  z-index: 1;
+  margin: 10px;
+  background-color: white;
+  text-align: center;
   cursor: pointer;
   font-family: Arial;
 `
 
 export {
   DateSelectorWrapper,
-  MonthBarWrapper,
+  MonthBar,
   DateCell,
-  WeekdayBar,
-  WeekdayCell
+  CurrentMonthLayout,
+  WeekdayCell,
+  Calendar
 }
