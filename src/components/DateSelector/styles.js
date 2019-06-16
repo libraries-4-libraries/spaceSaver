@@ -1,6 +1,6 @@
 import styled from "styled-components";
-//These styles wrap the DateSelector components
 
+//These styles wrap the DateSelector components
 const DateSelectorWrapper = styled.div`
   position: absolute;
   display: inline-block;

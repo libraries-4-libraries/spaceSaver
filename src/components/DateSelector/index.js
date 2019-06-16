@@ -1,17 +1,11 @@
 import React from "react";
-import moment from "moment";
 import onClickOutside from "react-onclickoutside";
-import CurrentMonth from './currentMonth.jsx';
-import { DateSelectorWrapper } from './styles.js';
+import CurrentDate from './currentDate.jsx';
 
 class DateSelector extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      date: moment().format('MMMM Do YYYY'),
-      listOpen: false,
-    }
-
+    this.state = { listOpen: false }
     this.onClick = this.onClick.bind(this);
   }
 
@@ -38,7 +32,7 @@ class DateSelector extends React.Component {
 
     return (
       <div onClick={this.onClick}>
-        <CurrentMonth open={listOpen} />
+        <CurrentDate open={listOpen} />
       </div>
     );
   }
