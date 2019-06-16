@@ -1,5 +1,4 @@
 import React from "react";
-import onClickOutside from "react-onclickoutside";
 import CurrentDate from './currentDate.jsx';
 
 class DateSelector extends React.Component {
@@ -7,10 +6,6 @@ class DateSelector extends React.Component {
     super(props);
     this.state = { listOpen: false }
     this.onClick = this.onClick.bind(this);
-  }
-
-  handleClickOutside(e) {
-    this.setState({ listOpen: false });
   }
 
   toggleList() {
@@ -22,6 +17,7 @@ class DateSelector extends React.Component {
   onClick() {
     this.toggleList();
   }
+
 
   componentDidMount() {
     console.log('Date Selector mounted');
@@ -38,4 +34,4 @@ class DateSelector extends React.Component {
   }
 }
 
-export default onClickOutside(DateSelector);
+export default DateSelector;

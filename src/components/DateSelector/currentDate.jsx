@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from "moment";
+import onClickOutside from "react-onclickoutside";
 import calendar, { THIS_MONTH, WEEK_DAYS, CALENDAR_MONTHS } from '../helpers/calendar.js';
 import { DateSelectorWrapper, CurrentMonthLayout, WeekdayCell, DateCell, Calendar, MonthBar } from './styles.js';
 
@@ -7,37 +8,68 @@ class CurrentDate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      listOpen: false,
       date: moment().format('MMMM Do YYYY'),
       monthNumber: THIS_MONTH,
-      monthName: Object.keys(CALENDAR_MONTHS)[THIS_MONTH - 1]
+      monthName: Object.keys(CALENDAR_MONTHS)[THIS_MONTH - 1],
+      currentMonthSelected: true,
+      monthBarContent: `${Object.keys(CALENDAR_MONTHS)[THIS_MONTH - 1]} >`
     }
 
+    this.onClick = this.onClick.bind(this);
     this.selectDate = this.selectDate.bind(this);
+    this.selectMonth = this.selectMonth.bind(this);
     this.renderDates = this.renderDates.bind(this);
   }
 
-  componentDidMount(){
-    // console.log(this.state.currentMonthNumber);
-    // console.log(this.state.currentMonthName);
+  handleClickOutside(e) {
+    this.setState({ listOpen: false });
+  }
+
+  onClick() {
+    this.toggleList();
+  }
+
+  toggleList() {
+    this.setState(prevState => ({
+      listOpen: !prevState.listOpen
+    }));
   }
 
   selectDate(e) {
 
-    let date = this.state.date;
+    let {date, monthName } = this.state;
     let selection = e.currentTarget.textContent;
+    let notElevenCheck = !(selection[0] === '1')
 
-    if (selection === '1' || selection[1] === '1') {
+    if (selection === '1' || (notElevenCheck && selection[1] === '1')) {
       selection = selection + 'st';
-    } else if (selection === '2' || selection[1] === '2') {
+    } else if (selection === '2' || (notElevenCheck && selection[1] === '2')) {
       selection = selection + 'nd';
-    } else if (selection === '3' || selection[1] === '3') {
+    } else if (selection === '3' || (notElevenCheck && selection[1] === '3')) {
       selection = selection + 'rd';
     } else {
       selection = selection + 'th';
     }
 
-    date = moment().format(`MMMM [${selection}] YYYY`);
-    this.setState({ date });
+    date = moment().format(`[${monthName}] [${selection}] YYYY`);
+    this.setState({ date, listOpen: false });
+  }
+
+  selectMonth() {
+    if (this.state.currentMonthSelected) {
+      let monthNumber = THIS_MONTH + 1;
+      let monthName = Object.keys(CALENDAR_MONTHS)[monthNumber - 1];
+      let monthBarContent = `< ${monthName}`
+      let currentMonthSelected = false;
+      this.setState({ monthNumber, monthName, monthBarContent, currentMonthSelected });
+    } else {
+      let monthNumber = THIS_MONTH;
+      let monthName = Object.keys(CALENDAR_MONTHS)[monthNumber - 1];
+      let monthBarContent = `${monthName} >`
+      let currentMonthSelected = true;
+      this.setState({ monthNumber, monthName, monthBarContent, currentMonthSelected });
+    }
   }
 
 
@@ -64,6 +96,8 @@ class CurrentDate extends React.Component {
             let currentDayTest = (!prevNextTest && dateInfo[2] === moment().format('Do').slice(0, 2));
             let replaceZeroTest = (dateInfo[2][0] === '0')
 
+            if (this.state.monthName != Object.keys(CALENDAR_MONTHS)[THIS_MONTH - 1]) { currentDayTest = false }
+
             if (prevNextTest) { color = 'grey'; selectorFunction = null; }
             if (currentDayTest) { color = 'blue' }
             if (replaceZeroTest) { dateInfo[2] = dateInfo[2].replace(/0/gi, '') }
@@ -81,11 +115,11 @@ class CurrentDate extends React.Component {
 
 
   render() {
-    const { monthNumber } = this.state;
+    const { listOpen, monthNumber, monthBarContent } = this.state;
 
-    if (!this.props.open) {
+    if (!listOpen) {
       return (
-        <DateSelectorWrapper>
+        <DateSelectorWrapper onClick={this.onClick}>
           {`${this.state.date} >`}
         </DateSelectorWrapper>
       );
@@ -93,7 +127,7 @@ class CurrentDate extends React.Component {
       return (
         <Calendar>
         <CurrentMonthLayout>
-            <MonthBar>{`${this.state.monthName} >`}</MonthBar>
+            <MonthBar onClick={this.selectMonth}>{monthBarContent}</MonthBar>
           {Object.values(WEEK_DAYS).map((day, index) => {
             return (
               <WeekdayCell key={index}>{day}</WeekdayCell>
@@ -108,4 +142,4 @@ class CurrentDate extends React.Component {
   }
 }
 
-export default CurrentDate;
+export default onClickOutside(CurrentDate);
