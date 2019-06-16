@@ -1,7 +1,7 @@
 import React from "react";
 import onClickOutside from "react-onclickoutside";
 import { formatLocations } from './helpers/locations.js';
-import { LocationSelectorWrapper, LocationItem } from './styledComponents.jsx';
+import { LocationSelectorWrapper, LocationItem } from './styles.jsx';
 
 const locationsMock = [
   'Walnut Creek Library',
@@ -32,7 +32,7 @@ class LocationDropdown extends React.Component {
   toggleList() {
     this.setState(prevState => ({
       listOpen: !prevState.listOpen
-    }))
+    }));
   }
 
   selectLocation(e) {

@@ -1,8 +1,7 @@
 import React from "react";
 import Cell from "./Cell.jsx";
 import moment from "moment";
-import { RoomCell } from './styledComponents.jsx';
-
+import { RoomCell } from './styles.jsx';
 
 function RoomDisplay(props) {
   let hours = [];
@@ -16,12 +15,12 @@ function RoomDisplay(props) {
     let align = 'center'
     props.currentBookings.forEach((booking) => {
       let time = moment(booking.startTime);
-      //console.log('hours compare', time.hours, hour.hours)
+
       if (time.hours() === hour.hours()) {
         text = booking.name
         booked = true;
       }
-    })
+    });
     hours.push([bgColor, text, booked, hour.toISOString(), align]);
 
     props.startTime.add(15, "minutes");
@@ -30,7 +29,16 @@ function RoomDisplay(props) {
   return (
     <RoomCell>
       {hours.map((item, index) => {
-        return <Cell key={index} color={item[0]} text={item[1]} booked={item[2]} time={item[3]} room={props.roomName} align={item[4]} />;
+        return (
+          <Cell
+            key={index}
+            color={item[0]}
+            text={item[1]}
+            booked={item[2]}
+            time={item[3]}
+            room={props.roomName}
+            align={item[4]} />
+          );
       })}
     </RoomCell>
   );

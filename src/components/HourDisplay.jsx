@@ -1,7 +1,7 @@
 import React from "react";
 import Cell from "./Cell.jsx";
 import moment from "moment";
-import { HourCell } from './styledComponents.jsx';
+import { HourCell } from './styles.jsx';
 
 function HourDisplay(props) {
   let hours = [];

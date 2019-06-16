@@ -18,10 +18,6 @@ class DateSelector extends React.Component {
     this.toggleList();
   }
 
-  componentDidMount() {
-    console.log('Date Selector mounted');
-  }
-
   render() {
     const { listOpen } = this.state;
 

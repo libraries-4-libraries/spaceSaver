@@ -1,6 +1,7 @@
 import styled, { createGlobalStyle } from "styled-components";
 import reset from 'styled-reset';
 
+//These styles wrap the general components
 const GlobalStyle = createGlobalStyle`
   ${reset};
 `;
