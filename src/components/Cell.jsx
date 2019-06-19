@@ -22,6 +22,20 @@ class Cell extends React.Component {
       let name = window.prompt('Please enter name for reservation: ');
       if (name) {
         //post request to server
+        let data = {
+          name: name,
+          library: 'tbd',
+          roomName: this.props.room,
+          time: this.props.time,
+          date: 'tbd'
+        }
+
+        fetch('http://localhost:3838/bookings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
         this.setState({
           booked: true,
           text: name
