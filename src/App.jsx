@@ -1,11 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import rootReducer from './reducers'
 
 import moment from 'moment';
 
 import HourDisplay from './components/HourDisplay.jsx'
 import RoomDisplay from './components/RoomDisplay.jsx'
 
+import DisplayText from './components/DisplayText.jsx'
+import {setCurrentLibrary, addBooking} from "./actions"
+
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 
 const bookingsURL = 'http://localhost:3838/bookings'
@@ -26,6 +33,8 @@ class App extends React.Component {
         this.setState({
           bookings: data
         })
+        data.forEach(item => { console.log('storing', item); store.dispatch(addBooking(item))})
+        store.dispatch(setCurrentLibrary(data[0].room))
       })
     })
     fetch(roomsURL).then((res) => {
@@ -55,9 +64,11 @@ class App extends React.Component {
       )
     })
   }
+
   render() {
     return (
-      <div container={true}>
+      <div >
+        <DisplayText text='lafayette'/>
         <HourDisplay startTime={moment({ hours: 10 })} duration={8 * 4} />
         {this.generateRooms()}
       </div>
@@ -66,4 +77,8 @@ class App extends React.Component {
 }
 
 const rootElement = document.getElementById('root');
-ReactDOM.render(<App />, rootElement)
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+, rootElement)
