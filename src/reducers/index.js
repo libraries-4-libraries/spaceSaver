@@ -1,15 +1,19 @@
 import {combineReducers} from 'redux'
 
-const initialState = {
-  currentLibrary: '',
-  bookings: []
-}
 
-//set inital state for stuff??
 const setLibrary = (prevState = '', action) => {
   switch(action.type){
-    case 'SET_CURRENT_LIBRARY':
+    case 'SET_LIBRARY':
       return action.library
+    default:
+      return prevState
+  }
+}
+
+const setDate = (prevState = '', action) => {
+  switch(action.type){
+    case 'SET_DATE':
+      return action.date
     default:
       return prevState
   }
@@ -34,5 +38,6 @@ const addBooking = (prevState = [], action) => {
 
 export default combineReducers({
   setLibrary,
+  setDate,
   addBooking
 });

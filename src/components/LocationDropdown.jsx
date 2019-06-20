@@ -1,4 +1,8 @@
 import React from "react";
+
+import { connect } from 'react-redux';
+import { setLibrary } from '../actions'
+
 import onClickOutside from "react-onclickoutside";
 import { formatLocations } from './helpers/locations.js';
 import { LocationSelectorWrapper, LocationItem } from './styles.jsx';
@@ -37,6 +41,7 @@ class LocationDropdown extends React.Component {
 
   selectLocation(e) {
     this.setState({ headerTitle: e.currentTarget.textContent });
+    this.props.dispatch(setLibrary(e.currentTarget.textContent))
   }
 
   renderList(listOpen, locations) {
@@ -69,4 +74,4 @@ class LocationDropdown extends React.Component {
   }
 }
 
-export default onClickOutside(LocationDropdown);
+export default connect()(onClickOutside(LocationDropdown));

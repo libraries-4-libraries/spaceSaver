@@ -8,8 +8,10 @@ import moment from 'moment';
 
 import HourDisplay from './components/HourDisplay.jsx'
 import RoomDisplay from './components/RoomDisplay.jsx'
+import SelectBar from './components/SelectBar.jsx';
+import { AppWrap, GlobalStyle } from './components/styles.jsx';
 
-import {setCurrentLibrary, addBooking} from "./actions"
+import {setLibrary, addBooking, addMultipleBookings} from "./actions"
 
 const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
@@ -32,8 +34,7 @@ class App extends React.Component {
         this.setState({
           bookings: data
         })
-        data.forEach(item => { console.log('storing', item); store.dispatch(addBooking(item))})
-        store.dispatch(setCurrentLibrary(data[0].room))
+        data.forEach(item => {store.dispatch(addBooking(item))})
       })
     })
     fetch(roomsURL).then((res) => {
@@ -66,11 +67,13 @@ class App extends React.Component {
 
   render() {
     return (
-      <div >
-        <HourDisplay startTime={moment({ hours: 10 })} duration={8 * 4} />
-        {this.generateRooms()}
-      </div>
-    )
+        <AppWrap>
+          <GlobalStyle />
+          <SelectBar/>
+          <HourDisplay startTime={moment({ hours: 10 })} duration={8 * 4} />
+          {this.generateRooms()}
+        </AppWrap>
+      );
   }
 }
 
