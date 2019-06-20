@@ -16,8 +16,13 @@
     "firebase": "^5.9.0",
     "firebase-admin": "^7.1.1",
     "moment": "^2.24.0",
+<<<<<<< HEAD
     "react-redux": "^7.0.3",
     "react-selectable": "^2.0.1"
+=======
+    "styled-components": "^4.2.0",
+    "styled-reset": "^2.0.12"
+>>>>>>> 6b4cc377714cee7203afce892d2259304b4929b1
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
