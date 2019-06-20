@@ -1,6 +1,5 @@
 import React from "react";
 import { BasicCell } from './styledComponents.jsx';
-//import Grid from '@material-ui/core/Grid'
 
 
 class Cell extends React.Component {
@@ -44,11 +43,7 @@ class Cell extends React.Component {
     }
   }
 
-<<<<<<< HEAD
   render() {
-=======
-  render(){
->>>>>>> 6b4cc377714cee7203afce892d2259304b4929b1
     return (
       <BasicCell
         alignCell={this.props.align}
