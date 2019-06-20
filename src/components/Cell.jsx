@@ -1,6 +1,5 @@
 import React from "react";
-import { BasicCell } from './styledComponents.jsx';
-
+import { BasicCell } from './styles.jsx';
 
 class Cell extends React.Component {
   constructor(props) {
@@ -15,28 +14,42 @@ class Cell extends React.Component {
     this.setState({
       booked: this.props.booked,
       text: this.props.text
-    })
+    });
   }
 
   onClick() {
     if (this.state.booked === false) {
-      let name = window.prompt('Please enter name for reservation: ')
+      let name = window.prompt('Please enter name for reservation: ');
       if (name) {
         //post request to server
+        let data = {
+          name: name,
+          library: 'tbd',
+          roomName: this.props.room,
+          time: this.props.time,
+          date: 'tbd'
+        }
+
+        fetch('http://localhost:3838/bookings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
         this.setState({
           booked: true,
           text: name
-        })
+        });
       }
     } else if (this.state.booked === true) {
-      let cancel = window.confirm('Cancel reservation?')
+      let cancel = window.confirm('Cancel reservation?');
       if (cancel) {
         //delete request to server
 
         this.setState({
           booked: false,
           text: 'available'
-        })
+        });
       }
     } else {
       //do nothing
