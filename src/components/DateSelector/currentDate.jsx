@@ -1,5 +1,9 @@
 import React from 'react';
 import moment from "moment";
+
+import { connect } from 'react-redux'
+import { setDate } from '../../actions'
+
 import onClickOutside from "react-onclickoutside";
 import calendar, { THIS_YEAR, THIS_MONTH, WEEK_DAYS, CALENDAR_MONTHS } from '../helpers/calendar.js';
 import { DateSelectorWrapper, CurrentMonthLayout, WeekdayCell, DateCell, Calendar, MonthBar } from './styles.js';
@@ -55,6 +59,11 @@ class CurrentDate extends React.Component {
     if (THIS_MONTH === 12) { year = year + 1 }
 
     date = `${monthName} ${selection} ${year}`;
+
+    //convert date from string to moment object before storing
+    let formattedDate = moment(date, 'MMMM Do YYYY')
+    this.props.dispatch(setDate(formattedDate))
+
     this.setState({ date, listOpen: false });
   }
 
@@ -144,4 +153,4 @@ class CurrentDate extends React.Component {
   }
 }
 
-export default onClickOutside(CurrentDate);
+export default connect()(onClickOutside(CurrentDate));
