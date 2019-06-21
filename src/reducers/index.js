@@ -19,6 +19,15 @@ const setDate = (prevState = '', action) => {
   }
 }
 
+const setTime = (prevState = '', action) => {
+  switch(action.type){
+    case 'SET_TIME':
+      return action.time
+    default:
+      return prevState
+  }
+}
+
 const addBooking = (prevState = [], action) => {
   switch(action.type){
     case 'ADD_BOOKING':
@@ -39,5 +48,6 @@ const addBooking = (prevState = [], action) => {
 export default combineReducers({
   setLibrary,
   setDate,
+  setTime,
   addBooking
 });

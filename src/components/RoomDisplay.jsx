@@ -1,11 +1,17 @@
 import React from "react";
 import Cell from "./Cell.jsx";
+
+import { RoomCell } from './styles.jsx';
+
 import moment from "moment";
+
+import { connect } from 'react-redux'
+import { setTime } from '../actions'
 
 import { createSelectable, SelectableGroup } from "react-selectable";
 
 const SelectableCell = createSelectable(Cell);
-import { RoomCell } from './styles.jsx';
+
 
 function RoomDisplay(props) {
   let hours = [];
@@ -34,6 +40,7 @@ function RoomDisplay(props) {
        <SelectableGroup
           onSelection={keys => {
             console.log("these have been selected:", keys);
+            props.dispatch(setTime(keys))
           }}
       >
         {hours.map((item, index) => {
@@ -52,4 +59,4 @@ function RoomDisplay(props) {
   );
 }
 
-export default RoomDisplay;
+export default connect()(RoomDisplay);
