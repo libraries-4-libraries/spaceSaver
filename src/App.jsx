@@ -15,7 +15,6 @@ import {setLibrary, addBooking, addMultipleBookings} from "./actions"
 
 const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-
 const bookingsURL = 'http://localhost:3838/bookings'
 const roomsURL = 'http://localhost:3838/rooms'
 
