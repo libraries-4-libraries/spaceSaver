@@ -12,8 +12,8 @@ class Cell extends React.Component {
 
   componentDidMount() {
     this.setState({
-      booked: this.props.booked,
-      text: this.props.text
+      booked: this.props.cellObject.booked,
+      text: this.props.cellObject.text
     });
   }
 
@@ -25,8 +25,8 @@ class Cell extends React.Component {
         let data = {
           name: name,
           library: 'tbd',
-          roomName: this.props.room,
-          time: this.props.time,
+          roomName: this.props.cellObject.room,
+          time: this.props.cellObject.time,
           date: 'tbd'
         }
 
@@ -59,9 +59,9 @@ class Cell extends React.Component {
   render() {
     return (
       <BasicCell
-        alignCell={this.props.align}
+        alignCell={this.props.cellObject.align}
         onClick={this.onClick}
-        backgroundColor={this.state.booked ? '#92D177' : this.props.color}>
+        backgroundColor={this.state.booked ? '#92D177' : this.props.cellObject.color}>
         {this.state.text}
       </BasicCell>
     );
