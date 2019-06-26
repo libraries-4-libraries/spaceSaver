@@ -6,11 +6,11 @@ import { RoomCell } from './styles.jsx';
 import moment from "moment";
 
 import { connect } from 'react-redux'
-import { setTime} from '../actions'
+import { setTime, setRoom } from '../actions'
 
 
 import { createSelectable, SelectableGroup } from "react-selectable";
-import { formatHours } from './helpers/formatHours.js'
+import { validateBookingLength } from './helpers/validators.js'
 
 import BookingFormDialog from "./ReservationConfirmationDialog.jsx";
 
@@ -65,10 +65,12 @@ function RoomDisplay(props) {
     <RoomCell>
        <SelectableGroup
           onSelection={keys => {
-            console.log('open?', open)
+            let s = keys[0]
+            let e = keys[keys.length-1]
             console.log("these have been selected:", keys);
-            props.dispatch(setTime(keys));
-
+            props.dispatch(setTime({start: s.hour, end: e.hour}));
+            props.dispatch(setRoom(s.room))
+            //console.log('booking length', validateBookingLength(keys, 120))
             handleClickOpen()
           }}
       >
@@ -77,12 +79,6 @@ function RoomDisplay(props) {
           selectableKey={item}
           key={index}
           cellObject={item}
-          // color={item[0]}
-          // text={item[1]}
-          // booked={item[2]}
-          // time={item[3]}
-          // room={props.roomName}
-          // align={item[4]}
            />;
         })}
       </SelectableGroup>

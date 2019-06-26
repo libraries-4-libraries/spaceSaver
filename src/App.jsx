@@ -11,7 +11,7 @@ import RoomDisplay from './components/RoomDisplay.jsx'
 import SelectBar from './components/SelectBar.jsx';
 import { AppWrap, GlobalStyle } from './components/styles.jsx';
 
-import {setLibrary, addBooking, addMultipleBookings} from "./actions"
+import {setLibrary, addBooking, addMultipleBookings, setDate} from "./actions"
 
 const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
@@ -43,6 +43,8 @@ class App extends React.Component {
         })
       })
     })
+    store.dispatch(setDate(moment()))
+    store.dispatch(setLibrary('Walnut Creek Library'))
   }
 
   generateRooms() {

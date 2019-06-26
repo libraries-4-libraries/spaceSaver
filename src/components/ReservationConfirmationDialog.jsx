@@ -6,29 +6,55 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogDataText from './DialogDataText.jsx';
 
-export default function FormDialog(props) {
+import { setName, setEmail } from '../actions'
+import { connect } from 'react-redux';
+
+
+function FormDialog(props) {
   return (
       <Dialog open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Reservation Confirmation</DialogTitle>
         <DialogContent>
+          <DialogDataText/>
           <TextField
+            inputProps={{
+              onChange:
+                (e)=>{props.dispatch(setName(e.target.value))
+              }
+            }}
             autoFocus
             margin="dense"
             id="name"
             label="Name"
+            type="text"
+            fullWidth
+          />
+          <TextField
+            inputProps={{
+              onChange:
+                (e)=>{props.dispatch(setEmail(e.target.value))
+              }
+            }}
+            autoFocus
+            margin="dense"
+            id="email"
+            label="E-mail Address (optional)"
             type="email"
             fullWidth
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={props.handleClose} color="primary">
-            Cancel
+            Make Reservation
           </Button>
           <Button onClick={props.handleClose} color="primary">
-            Make Reservation
+            Cancel
           </Button>
         </DialogActions>
       </Dialog>
   );
 }
+
+export default connect()(FormDialog)
