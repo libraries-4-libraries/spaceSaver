@@ -60,7 +60,7 @@ class CurrentDate extends React.Component {
 
     date = `${monthName} ${selection} ${year}`;
 
-    //convert date from string to moment object before storing
+    //convert date from string to moment object, then dispatch to store
     let formattedDate = moment(date, 'MMMM Do YYYY')
     this.props.dispatch(setDate(formattedDate))
 

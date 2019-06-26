@@ -1,30 +1,62 @@
 import React from "react";
 import Cell from "./Cell.jsx";
-import moment from "moment";
 
-import { createSelectable, SelectableGroup } from "react-selectable";
-
-const SelectableCell = createSelectable(Cell);
 import { RoomCell } from './styles.jsx';
 
+import moment from "moment";
+
+import { connect } from 'react-redux'
+import { setTime, setRoom } from '../actions'
+
+
+import { createSelectable, SelectableGroup } from "react-selectable";
+import { validateBookingLength } from './helpers/validators.js'
+
+import BookingFormDialog from "./ReservationConfirmationDialog.jsx";
+
+const SelectableCell = createSelectable(Cell);
+
+
 function RoomDisplay(props) {
+  //controls for dialog
+  const [open, setOpen] = React.useState(false);
+
+  function handleClickOpen() {
+    setOpen(true);
+  }
+
+  function handleClose() {
+    setOpen(false);
+  }
+
+  //create and populate room schedule
   let hours = [];
   let bgColor = '#CAFFB9';
+  let roomNameCellObject = {
+    color: '#66A182',
+    text: props.roomName,
+    align: 'left'
+  }
+  hours.push(roomNameCellObject)
 
-  hours.push(['#66A182', props.roomName, null, null, 'left'])
   for (var i = 0; i <= props.duration; i++) {
-    let hour = moment(props.startTime);
-    let text = 'available';
-    let booked = false;
-    let align = 'center'
+    let cellObject = {
+      color: bgColor,
+      text: 'available',
+      booked: false,
+      hour: moment(props.startTime),
+      room: props.roomName,
+      align: 'center'
+    }
+
     props.currentBookings.forEach((booking) => {
       let time = moment(booking.startTime);
-      if (time.hours() === hour.hours()) {
-        text = booking.name
-        booked = true;
+      if (time.hours() === cellObject.hour.hours()) {
+        cellObject.text = booking.name
+        cellObject.booked = true;
       }
     });
-    hours.push([bgColor, text, booked, hour.toISOString(), align]);
+    hours.push(cellObject);
 
     props.startTime.add(15, "minutes");
   }
@@ -33,23 +65,26 @@ function RoomDisplay(props) {
     <RoomCell>
        <SelectableGroup
           onSelection={keys => {
+            let s = keys[0]
+            let e = keys[keys.length-1]
             console.log("these have been selected:", keys);
+            props.dispatch(setTime({start: s.hour, end: e.hour}));
+            props.dispatch(setRoom(s.room))
+            //console.log('booking length', validateBookingLength(keys, 120))
+            handleClickOpen()
           }}
       >
         {hours.map((item, index) => {
           return <SelectableCell
           selectableKey={item}
           key={index}
-          color={item[0]}
-          text={item[1]}
-          booked={item[2]}
-          time={item[3]}
-          room={props.roomName}
-          align={item[4]} />;
+          cellObject={item}
+           />;
         })}
       </SelectableGroup>
+      <BookingFormDialog open={open} handleClose={handleClose}/>
     </RoomCell>
   );
 }
 
-export default RoomDisplay;
+export default connect()(RoomDisplay);
