@@ -11,8 +11,20 @@ import { setTime, setRoom } from '../actions'
 
 import { createSelectable, SelectableGroup } from "react-selectable";
 import { validateBookingLength } from './helpers/validators.js'
-
 import BookingFormDialog from "./ReservationConfirmationDialog.jsx";
+
+import * as firebase from 'firebase';
+const config = {
+  apiKey: "AIzaSyCKJHJ1s2zVHQikU_VL25DNc7Unw1qWLPY",
+  authDomain: "space-saver-8dec0.firebaseapp.com",
+  databaseURL: "https://space-saver-8dec0.firebaseio.com",
+  projectId: "space-saver-8dec0",
+  storageBucket: "space-saver-8dec0.appspot.com",
+  messagingSenderId: "663245260208",
+  appId: "1:663245260208:web:6b67ed79499b33b9"
+};
+firebase.initializeApp(config);
+const db = firebase.database();
 
 const SelectableCell = createSelectable(Cell);
 
@@ -26,7 +38,20 @@ function RoomDisplay(props) {
   }
 
   function handleClose() {
+    const hours = moment.duration(props.time.end.diff(props.time.start));
+    const duration = hours.asHours();
+    const startTime = moment(props.time.start).toISOString();
+    const roomBooking = db.ref('bookings/' + props.name);
+    roomBooking.set({
+      room: props.roomName,
+      startTime,
+      duration,
+      name: props.name,
+      email: props.email,
+      party: 1
+    });
     setOpen(false);
+    //BUG ON RERENDER ONLY WHOLE NUMBERS ARE BEING SHOWN AS BLOCKED OFF
   }
 
   //create and populate room schedule
@@ -34,22 +59,22 @@ function RoomDisplay(props) {
   let bgColor = '#CAFFB9';
   let roomNameCellObject = {
     color: '#66A182',
-    text: props.roomName,
+    text: props.ownProps.roomName,
     align: 'left'
   }
   hours.push(roomNameCellObject)
 
-  for (var i = 0; i <= props.duration; i++) {
+  for (var i = 0; i <= props.ownProps.duration; i++) {
     let cellObject = {
       color: bgColor,
       text: 'available',
       booked: false,
-      hour: moment(props.startTime),
-      room: props.roomName,
+      hour: moment(props.ownProps.startTime),
+      room: props.ownProps.roomName,
       align: 'center'
     }
 
-    props.currentBookings.forEach((booking) => {
+    props.ownProps.currentBookings.forEach((booking) => {
       let time = moment(booking.startTime);
       if (time.hours() === cellObject.hour.hours()) {
         cellObject.text = booking.name
@@ -58,9 +83,8 @@ function RoomDisplay(props) {
     });
     hours.push(cellObject);
 
-    props.startTime.add(15, "minutes");
+    props.ownProps.startTime.add(15, "minutes");
   }
-
   return (
     <RoomCell>
        <SelectableGroup
@@ -87,4 +111,14 @@ function RoomDisplay(props) {
   );
 }
 
-export default connect()(RoomDisplay);
+function mapStateToProps(state, ownProps){
+  return {
+    time: state.time,
+    date: state.setDate,
+    name: state.name,
+    email: state.email,
+    ownProps
+  }
+}
+
+export default connect(mapStateToProps)(RoomDisplay);
