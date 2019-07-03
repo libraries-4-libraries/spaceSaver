@@ -1,9 +1,11 @@
+
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 
 const port = 3838
 const app = express();
+require('dotenv').config();
 
 const bookings = require('../database/bookings.js');
 //const bookingsRef = require('../database/bookingsRef.js');

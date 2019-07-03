@@ -14,14 +14,15 @@ import { validateBookingLength } from './helpers/validators.js'
 import BookingFormDialog from "./ReservationConfirmationDialog.jsx";
 
 import * as firebase from 'firebase';
+
 const config = {
-  apiKey: "AIzaSyCKJHJ1s2zVHQikU_VL25DNc7Unw1qWLPY",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "space-saver-8dec0.firebaseapp.com",
   databaseURL: "https://space-saver-8dec0.firebaseio.com",
   projectId: "space-saver-8dec0",
   storageBucket: "space-saver-8dec0.appspot.com",
   messagingSenderId: "663245260208",
-  appId: "1:663245260208:web:6b67ed79499b33b9"
+  appId: process.env.FIREBASE_APP_ID
 };
 firebase.initializeApp(config);
 const db = firebase.database();
@@ -37,7 +38,8 @@ function RoomDisplay(props) {
     setOpen(true);
   }
 
-  function handleClose() {
+  function handleClose(boolean) {
+    if (boolean) {
     const hours = moment.duration(props.time.end.diff(props.time.start));
     const duration = hours.asHours();
     const startTime = moment(props.time.start).toISOString();
@@ -50,8 +52,8 @@ function RoomDisplay(props) {
       email: props.email,
       party: 1
     });
-    setOpen(false);
-    //BUG ON RERENDER ONLY WHOLE NUMBERS ARE BEING SHOWN AS BLOCKED OFF
+  }
+  setOpen(false);
   }
 
   //create and populate room schedule
@@ -85,6 +87,7 @@ function RoomDisplay(props) {
 
     props.ownProps.startTime.add(15, "minutes");
   }
+  console.log('wtf is happening', props)
   return (
     <RoomCell>
        <SelectableGroup
