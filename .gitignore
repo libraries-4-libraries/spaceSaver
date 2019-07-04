@@ -2,6 +2,7 @@ node_modules
 dist/bundle.js
 firebaseKeys.json
 package-lock.json
+.env
 
 # Mac OS
 .DS_Store

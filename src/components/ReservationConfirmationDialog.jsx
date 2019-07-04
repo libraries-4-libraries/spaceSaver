@@ -46,10 +46,10 @@ function FormDialog(props) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={props.handleClose} color="primary">
+          <Button onClick={(e) => props.handleClose(true)} color="primary">
             Make Reservation
           </Button>
-          <Button onClick={props.handleClose} color="primary">
+          <Button onClick={(e) => props.handleClose(false)} color="primary">
             Cancel
           </Button>
         </DialogActions>

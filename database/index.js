@@ -3,7 +3,7 @@ const serviceAccount = require('../firebaseKeys.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://study-room-database.firebaseio.com'
+  databaseURL: 'https://space-saver-8dec0.firebaseio.com'
 })
 
 const db = admin.database()
